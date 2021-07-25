@@ -44,17 +44,18 @@ class _CustomAppbarState extends State<CustomAppbar>
           elevation: 0.0,
           centerTitle: true,
           actions: [
-            IconButton(
-                icon: Icon(Icons.search),
-                onPressed: () {
-                  print('tapped');
-                }),
+            // IconButton(
+            //     icon: Icon(Icons.search),
+            //     onPressed: () {
+            //       print('tapped');
+            //     }),
+            _SearchBar()
           ],
           flexibleSpace: Container(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             child: Container(
-              child: userInfo(controller, t),
+              child: _userInfo(controller, t),
               padding: EdgeInsets.only(top: widget.preferredSize.height / 3),
             ),
             decoration: BoxDecoration(
@@ -71,7 +72,7 @@ class _CustomAppbarState extends State<CustomAppbar>
   }
 }
 
-userInfo(AnimationController controller, t) {
+_userInfo(AnimationController controller, t) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.center,
     crossAxisAlignment: CrossAxisAlignment.center,
@@ -134,4 +135,78 @@ userInfo(AnimationController controller, t) {
       ),
     ],
   );
+}
+
+class _SearchBar extends StatefulWidget {
+  _SearchBar({Key? key}) : super(key: key);
+
+  @override
+  __SearchBarState createState() => __SearchBarState();
+}
+
+class __SearchBarState extends State<_SearchBar> {
+  bool isOpen = false;
+  FocusNode f = FocusNode();
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedContainer(
+      duration: Duration(seconds: 1),
+      width: isOpen ? MediaQuery.of(context).size.width * 0.8 : 56,
+      height: 56,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        color: isOpen ? Colors.white : Colors.transparent,
+      ),
+      child: Row(
+        children: [
+          Expanded(
+              child: Container(
+            margin: EdgeInsets.symmetric(vertical: 8),
+            padding: EdgeInsets.only(left: 16),
+            child: isOpen
+                ? TextField(
+                    autofocus: true,
+                    decoration: InputDecoration(
+                      hintText: "Search",
+                      border: InputBorder.none,
+                    ),
+                    onSubmitted: (_) {
+                      f.unfocus();
+                      setState(() {
+                        isOpen = !isOpen;
+                      });
+                    },
+                  )
+                : null,
+          )),
+          AnimatedContainer(
+            duration: Duration(seconds: 1),
+            child: Material(
+              type: MaterialType.transparency,
+              child: InkWell(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(isOpen ? 32 : 0),
+                  topRight: Radius.circular(0),
+                  bottomLeft: Radius.circular(isOpen ? 32 : 0),
+                  bottomRight: Radius.circular(0),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Icon(Icons.search,
+                      color: isOpen
+                          ? Theme.of(context).primaryColor
+                          : Colors.white),
+                ),
+                onTap: () {
+                  setState(() {
+                    isOpen = !isOpen;
+                  });
+                },
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
 }

@@ -38,71 +38,80 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: CustomAppbar(),
-        drawer: Drawer(),
-        body: ListView(
-            controller: s,
-            physics: BouncingScrollPhysics(),
-            children: [
-              Container(
-                height: MediaQuery.of(context).size.height * 1.1,
-                padding: EdgeInsets.all(12),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Text("My Tasks",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold)),
-                        GestureDetector(
-                          onTap: () => _selectDate(context),
-                          child: Container(
-                              height: 45,
-                              width: 45,
-                              decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(12)),
-                                color: Theme.of(context).primaryColor,
-                              ),
-                              child: Icon(Icons.calendar_today,
-                                  color: Colors.white)),
-                        )
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    _MyTasks(),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Text("Active Projects",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold)),
-                      ],
-                    ),
-                    Expanded(child: _MyProjects(s: s))
-                  ],
+    return GestureDetector(
+      behavior: HitTestBehavior.translucent,
+      onTap: () {
+        FocusScopeNode currentFocus = FocusScope.of(context);
+
+        if (!currentFocus.hasPrimaryFocus) {
+          currentFocus.unfocus();
+        }
+      },
+      child: Scaffold(
+          appBar: CustomAppbar(),
+          drawer: Drawer(),
+          body: ListView(
+              controller: s,
+              physics: BouncingScrollPhysics(),
+              children: [
+                Container(
+                  height: MediaQuery.of(context).size.height * 1.1,
+                  padding: EdgeInsets.all(12),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Text("My Tasks",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold)),
+                          GestureDetector(
+                            onTap: () => _selectDate(context),
+                            child: Container(
+                                height: 45,
+                                width: 45,
+                                decoration: BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(12)),
+                                  color: Theme.of(context).primaryColor,
+                                ),
+                                child: Icon(Icons.calendar_today,
+                                    color: Colors.white)),
+                          )
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      _MyTasks(s: s),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text("Active Projects",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold)),
+                        ],
+                      ),
+                      Expanded(child: _MyProjects())
+                    ],
+                  ),
                 ),
-              ),
-            ]));
+              ])),
+    );
   }
 }
 
 class _MyTasks extends StatelessWidget {
-  _MyTasks({
-    Key? key,
-  }) : super(key: key);
+  ScrollController s;
+  _MyTasks({Key? key, required this.s}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -113,13 +122,19 @@ class _MyTasks extends StatelessWidget {
               color: Colors.redAccent,
               task: TaskModel(
                   started: 12, tasksnow: 10, title: "Todo", icon: Icons.alarm)),
-          Task(
-              color: Colors.yellow,
-              task: TaskModel(
-                  started: 12,
-                  tasksnow: 10,
-                  title: "Progress",
-                  icon: Icons.play_arrow)),
+          GestureDetector(
+            onTap: () {
+              s.animateTo(500,
+                  duration: Duration(seconds: 2), curve: Curves.easeIn);
+            },
+            child: Task(
+                color: Colors.yellow,
+                task: TaskModel(
+                    started: 12,
+                    tasksnow: 10,
+                    title: "Progress",
+                    icon: Icons.play_arrow)),
+          ),
           Task(
               color: Theme.of(context).primaryColor,
               task: TaskModel(
@@ -131,8 +146,9 @@ class _MyTasks extends StatelessWidget {
 }
 
 class _MyProjects extends StatelessWidget {
-  ScrollController s;
-  _MyProjects({Key? key, required this.s}) : super(key: key);
+  _MyProjects({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -140,7 +156,6 @@ class _MyProjects extends StatelessWidget {
         margin: EdgeInsets.symmetric(vertical: 10),
         height: MediaQuery.of(context).size.height,
         child: GridView.count(
-          controller: s,
           crossAxisSpacing: 30,
           mainAxisSpacing: 8,
           crossAxisCount: 2,

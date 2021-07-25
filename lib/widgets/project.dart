@@ -28,7 +28,7 @@ class Project extends StatelessWidget {
           CircularPercentIndicator(
               backgroundColor: Colors.transparent,
               radius: 100,
-              animationDuration: 500,
+              animationDuration: 1500,
               progressColor: Colors.white,
               animation: true,
               circularStrokeCap: CircularStrokeCap.round,

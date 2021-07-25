@@ -4,7 +4,8 @@ import 'package:housy/widgets/project.dart';
 import 'package:housy/widgets/task.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key? key}) : super(key: key);
+  Function f;
+  HomePage({Key? key, required this.f}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -48,8 +49,8 @@ class _HomePageState extends State<HomePage> {
         }
       },
       child: Scaffold(
-          appBar: CustomAppbar(),
-          drawer: Drawer(),
+          backgroundColor: Colors.black,
+          appBar: CustomAppbar(f: widget.f),
           body: ListView(
               controller: s,
               physics: BouncingScrollPhysics(),

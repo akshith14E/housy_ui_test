@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomAppbar extends StatefulWidget with PreferredSizeWidget {
-  CustomAppbar({Key? key}) : super(key: key);
+  Function f;
+  CustomAppbar({Key? key, required this.f}) : super(key: key);
 
   @override
   _CustomAppbarState createState() => _CustomAppbarState();
@@ -38,19 +39,17 @@ class _CustomAppbarState extends State<CustomAppbar>
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.all(Radius.circular(20)),
+      borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
       clipBehavior: Clip.hardEdge,
       child: AppBar(
           elevation: 0.0,
           centerTitle: true,
-          actions: [
-            // IconButton(
-            //     icon: Icon(Icons.search),
-            //     onPressed: () {
-            //       print('tapped');
-            //     }),
-            _SearchBar()
-          ],
+          leading: IconButton(
+              onPressed: () {
+                widget.f();
+              },
+              icon: Icon(Icons.menu)),
+          actions: [_SearchBar()],
           flexibleSpace: Container(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,

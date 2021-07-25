@@ -24,7 +24,8 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
-  flutter_svg: ^0.22.0
+  flutter_svg:
+  flutter_swiper_null_safety: ^1.0.2
   percent_indicator: ^3.0.1
   syncfusion_flutter_calendar: ^19.2.48
 

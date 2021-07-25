@@ -126,7 +126,7 @@ _userInfo(AnimationController controller, t) {
           children: [
             Text(
               "Akshith Madhur",
-              style: TextStyle(fontSize: 32),
+              style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
             ),
             Text("Flutter Developer", style: TextStyle(fontSize: 18))
           ],

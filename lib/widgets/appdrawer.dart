@@ -73,7 +73,7 @@ class _AppDrawerState extends State<AppDrawer> {
                                 title: Text(
                                   "Payments",
                                   style: TextStyle(
-                                      color: Colors.white, fontSize: 22),
+                                      color: Colors.white, fontSize: 18),
                                 ),
                               ),
                               ListTile(
@@ -85,7 +85,7 @@ class _AppDrawerState extends State<AppDrawer> {
                                 title: Text(
                                   "Discount",
                                   style: TextStyle(
-                                      color: Colors.white, fontSize: 22),
+                                      color: Colors.white, fontSize: 18),
                                 ),
                               ),
                               ListTile(
@@ -97,7 +97,7 @@ class _AppDrawerState extends State<AppDrawer> {
                                 title: Text(
                                   "Notifications",
                                   style: TextStyle(
-                                      color: Colors.white, fontSize: 22),
+                                      color: Colors.white, fontSize: 18),
                                 ),
                               ),
                               ListTile(
@@ -109,7 +109,7 @@ class _AppDrawerState extends State<AppDrawer> {
                                 title: Text(
                                   "Orders",
                                   style: TextStyle(
-                                      color: Colors.white, fontSize: 22),
+                                      color: Colors.white, fontSize: 18),
                                 ),
                               ),
                               ListTile(
@@ -121,7 +121,7 @@ class _AppDrawerState extends State<AppDrawer> {
                                 title: Text(
                                   "Help",
                                   style: TextStyle(
-                                      color: Colors.white, fontSize: 22),
+                                      color: Colors.white, fontSize: 18),
                                 ),
                               ),
                             ],
@@ -140,7 +140,7 @@ class _AppDrawerState extends State<AppDrawer> {
                                   title: Text(
                                     "Settings",
                                     style: TextStyle(
-                                        color: Colors.white, fontSize: 22),
+                                        color: Colors.white, fontSize: 18),
                                   ),
                                 ),
                                 ListTile(
@@ -152,7 +152,7 @@ class _AppDrawerState extends State<AppDrawer> {
                                   title: Text(
                                     "Support",
                                     style: TextStyle(
-                                        color: Colors.white, fontSize: 22),
+                                        color: Colors.white, fontSize: 18),
                                   ),
                                 ),
                               ],
